@@ -1,2 +1,77 @@
+// create ns 
 kubectl create -f namespace.yaml
 
+//list the role
+kubectl get roles -n deployment-demo
+
+// let's exec in to the debug pod and see if has the privileges we mentioned in the role.
+
+kubectl exec -it debug /bin/bash -n webapps
+
+// How to Create Self-Signed Certificates using OpenSSL
+https://devopscube.com/create-self-signed-certificates-openssl/
+
+Execute the following kubectl command from the directory where you have the server.crt and key files or provide the absolute path of the files . hello-app-tls is an arbitrary name.
+
+kubectl create secret tls hello-app-tls \
+    --namespace dev \
+    --key server.key \
+    --cert server.crt
+    
+// ngress resource with TLS has to be created in the same namespace where you have the application deployed. So we create the example ingress TLS resource in dev namespace.
+
+// validate the Ingress TLS using the curl command as well as the browser
+curl https://demo.mlopshub.com -kv
+
+// 
+    prometheus.yaml: This is the main Prometheus configuration which holds all the scrape configs, service discovery details, storage locations, data retention configs, etc)
+    prometheus.rules: This file contains all the Prometheus alerting// In Prometheus terms, the config for collecting metrics from a collection of endpoints is called a job rules
+
+// In Prometheus terms, the config for collecting metrics from a collection of endpoints is called a job
+
+
+first step in troubleshooting a pod is getting the status of the pods.
+
+kubectl get pods
+The following output shows the error states under the status.
+he next step is to describe the individual pod and browse through the events to pinpoint the reason which is causing the pod error.
+
+For example,
+
+kubectl describe pod config-service
+
+Container & Image Errors
+
+All these error states are part of the kubernetes container package & Kubernetes image package
+
+Following is the list of official Kubernetes pod errors with error descriptions.
+Pod Error Type	Error Description
+ErrImagePull	If kubernetes is not able to pull the image mentioned in the manifest.
+ErrImagePullBackOff	Container image pull failed, kubelet is backing off image pull
+ErrInvalidImageName	Indicates a wrong image name.
+ErrImageInspect	Unable to inspect the image.
+ErrImageNeverPull	Specified Image is absent on the node and PullPolicy is set to NeverPullImage
+ErrRegistryUnavailable	HTTP error when trying to connect to the registry
+ErrContainerNotFound	The specified container is either not present or not managed by the kubelet, within the declared pod.
+ErrRunInitContainer	Container initialization failed.
+ErrRunContainer	Pod’s containers don’t start successfully due to misconfiguration.
+ErrKillContainer	None of the pod’s containers were killed successfully.
+ErrCrashLoopBackOff	A container has terminated. The kubelet will not attempt to restart it.
+ErrVerifyNonRoot	A container or image attempted to run with root privileges.
+ErrCreatePodSandbox	Pod sandbox creation did not succeed.
+ErrConfigPodSandbox	Pod sandbox configuration was not obtained.
+ErrKillPodSandbox	A pod sandbox did not stop successfully.
+ErrSetupNetwork	Network initialization failed.
+ErrTeardownNetwork	
+
+
+//  Download the latest helm 3 installation script.
+
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-
+Step 2: Add execute permissions to the downloaded script.
+
+chmod +x get_helm.sh
+
+Execute the installation script. This script will automatically find the right binary for your system.
+
+./get_helm.sh
