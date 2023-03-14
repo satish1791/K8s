@@ -1,0 +1,19 @@
+// With Rolebinding we attach the role to
+// the service account. So the pods which use the service account in deployment-demo namespace will have all the access mentioned in the app-role
+
+cat <<EOF | kubectl apply -f -
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: app-rolebinding
+  namespace: deployment-demo 
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: app-role 
+subjects:
+- namespace: deployment-demo 
+  kind: ServiceAccount
+  name: app-service-account 
+EOF
