@@ -75,3 +75,23 @@ chmod +x get_helm.sh
 Execute the installation script. This script will automatically find the right binary for your system.
 
 ./get_helm.sh
+
+// Validate the Helm Chart
+helm lint .
+
+// To validate if the values are getting substituted in the templates, you can render the templated YAML files with the values
+helm template .
+
+// helm install --dry-run my-release nginx-chart
+
+commands to debug the helm charts and templates.
+
+    helm lint: This command takes a path to a chart and runs a series of tests to verify that the chart is well-formed.
+    helm get values: This command will output the release values installed to the cluster.
+    helm install --dry-run: Using this function we can check all the resource manifests and ensure that all the templated are working fine.
+    helm get manifest: This command will output the manifests that are running in the cluster.
+    helm diff: It will output the differences between the two revisions.
+
+
+
+
