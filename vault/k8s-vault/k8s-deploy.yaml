@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vault
+  template:
+    metadata:
+      labels:
+        app: vault
+    spec:
+      containers:
+      - name: vault
+        image: vault
+        imagePullPolicy: IfNotPresent
+        args: ["server", "-config=/vault/config/vault-config.hcl"]
+        env:
+          - name: VAULT_ADDR
+            value: http://localhost:8200
+        ports: 
+        - containerPort: 8200
+        volumeMounts:
+          - name: vault-config
+            mountPath: /vault/config
+      volumes:
+        - name: vault-config
+          configMap:
+            name: vault-config
+//This deployment specifies that one replica of the Vault container should be created, and it should use the configuration file stored in a ConfigMap.
+
+// Verify the installation:
+// Use the following command to verify that Vault is running:
+
+// $ kubectl get pods
+// This command should return the status of the Vault pod, which should be running.
