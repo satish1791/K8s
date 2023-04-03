@@ -1,0 +1,10 @@
+Integrate Vault with Kubernetes:
+Integrate Vault with Kubernetes by creating a Kubernetes authentication method for Vault. This will allow Kubernetes to authenticate and authorize requests to Vault.
+Here is an example of how to create a Kubernetes authentication method for Vault:
+
+$ vault auth enable kubernetes
+
+$ vault write auth/kubernetes/config \
+    token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
+    kubernetes_host="https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT_HTTPS" \
+    kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
